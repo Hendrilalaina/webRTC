@@ -1,0 +1,22 @@
+* WebRTC (Web Real Time Communication) *
+- is an open source project that enables peer-to-peer communication between browsers or the applications (mobile).
+- allows you to exchange any kind of media through the web (such as video, audio and data) without any required plugin or framework.
+
+* Signaling Server * 
+- does not do anything that is WebRTC-specific.
+- helps to exchange necessary information which are required to establish direct connection between users.
+- for signaling we can use whatever we like, from WebSocket to XMLHttpRequest.
+
+* STUN (Session Traversal Utilities for NAT) server * 
+- allows clients to discover their public IP address adn the type of NAT they are behind. This information is used to establish the media connection.
+- in 15-20% cases STUN server will fail and to establish connection between the peers we will need TURN server.
+
+* TURN (Traversal Using Relay NAT) server * 
+- a protocol for relaying network traffic.
+- will be used if STUN server will fail.
+- will be used as an assist to establish connection between the peers.
+- not public because of the traffic which is going through them.
+
+* SDP (Session Description Protocol) * 
+- is a format to describing multimedia communication sessions for the purposes of session announcement and session invitation.
+- does not deliver the media data but is used for negotiation between peers of various audio and video codecs, source address, timing information of audio and video.
