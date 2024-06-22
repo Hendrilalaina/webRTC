@@ -29,40 +29,51 @@
               </button>
             </div>
           </div>
-          <div class="personal_code_connecting_container">
-            <p class="personal_code_connecting_container_paragraph">Personal Code</p>
-            <div class="personal_code_connecting_input_container">
-              <input type="text" class="personal_code_input" id="personal_code_input">
-            </div>
-            <div class="personal_code_connecting_buttons_container">
-              <button class="connecting_button" id="personal_code_chat_button">
-                <img src="./utils/images/chatButton.png" class="connecting_buttons_image">
-              </button>
-              <button class="connecting_button" id="personal_code_video_button">
-                <img src="./utils/images/videoButton.png" class="connecting_buttons_image">
-              </button>
-            </div>
+        </div>
+        <div class="personal_code_connecting_container">
+          <p class="personal_code_connecting_container_paragraph">Personal Code</p>
+          <div class="personal_code_connecting_input_container">
+            <input type="text" class="personal_code_input" id="personal_code_input">
           </div>
-          <div class="stranger_connecting_container">
-            <p class="stranger_title_container">Stranger</p>
-            <div class="stranger_buttons_container">
-              <button class="connecting_button" id="stranger_chat_button">
-                <img src="./utils/images/chatButton.png" class="connecting_buttons_image">
-              </button>
-              <button class="connecting_button" id="stranger_video_button">
-                <img src="./utils/images/videoButton.png" class="connecting_buttons_image">
-              </button>
-            </div>
+          <div class="personal_code_connecting_buttons_container">
+            <button class="connecting_button" id="personal_code_chat_button">
+              <img src="./utils/images/chatButton.png" class="connecting_buttons_image">
+            </button>
+            <button class="connecting_button" id="personal_code_video_button">
+              <img src="./utils/images/videoButton.png" class="connecting_buttons_image">
+            </button>
           </div>
-          <div class="checkbox_container">
-            <div class="checkbox_connection" id="allow_strangers_checkbox">
-              <img src="./utils/images/check.png" id="allow_strangers_checkbox_image" class="display_none">
-            </div>
-            <p class="checkbox_container_paragraph">Allow connection from Strangers</p>
+        </div>
+        <div class="stranger_connecting_container">
+          <p class="stranger_title_container">Stranger</p>
+          <div class="stranger_buttons_container">
+            <button class="connecting_button" id="stranger_chat_button">
+              <img src="./utils/images/chatButton.png" class="connecting_buttons_image">
+            </button>
+            <button class="connecting_button" id="stranger_video_button">
+              <img src="./utils/images/videoButton.png" class="connecting_buttons_image">
+            </button>
+          </div>
+        </div>
+        <div class="checkbox_container">
+          <div class="checkbox_connection" id="allow_strangers_checkbox">
+            <img src="./utils/images/check.png" id="allow_strangers_checkbox_image" class="display_none">
+          </div>
+          <p class="checkbox_container_paragraph">Allow connection from Strangers</p>
+        </div>
+        <div class="dashboard_blur display_none" id="dashboard_blur"></div>
+      </div>
+      <div class="call_container">
+        <div class="videos_container">
+          <div class="videos_placeholder" id="video_placeholder">
+            <img src="./utils/images/logo.png">
+          </div>
+          <video class="remote_video display_none" id="remote_video" autoplay></video>
+          <div class="local_video_container">
+            <video class="local_video" id="local_video" muted autoplay></video>
           </div>
         </div>
       </div>
-      <div class="call_container"></div>
       <div class="messenger_container"></div>
     </div>
     <script src="socket.io/socket.io.js"></script>
