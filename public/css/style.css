@@ -41,7 +41,7 @@ body {
 }
 
 .dashboard_container {
-  width: 25%;
+  width: 28%;
   height: 100%;
   background: linear-gradient(168.68deg, #e446e4 1.12%, #6c0adb 100%);
   display: flex;
@@ -52,12 +52,12 @@ body {
 }
 
 .call_container {
-  width: 50%;
+  width: 48%;
   height: 100%;
 }
 
 .messenger_container {
-  width: 25%;
+  width: 24%;
   height: 100%;
   background: #f4f9fd;
   display: flex;
@@ -109,7 +109,7 @@ body {
 
 .personal_code_value_paragraph {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .personal_code_copy_button {
