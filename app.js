@@ -20,8 +20,22 @@ io.on('connection', (socket) => {
   console.log(connectedPeers)
 
   socket.on('pre-offer', (data) => {
-    console.log("pre-offer came!")
-    console.log(data)
+    console.log("pre offer came!")
+    const { calleePersonalCode, callType } = data
+
+    const connectedPeer = connectedPeers.find((peerSocketId) => {
+      peerSocketId === calleePersonalCode
+    })
+
+    console.log(connectedPeer)
+
+    if (connectedPeer) {
+      const data = {
+        callerSocketId: socket.id,
+        callType
+      }
+      io.to(calleePersonalCode).emit('pre-offer', data)
+    }
   })
 
   socket.on('disconnect', () => {
