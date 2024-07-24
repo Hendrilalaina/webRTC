@@ -23,9 +23,9 @@ io.on('connection', (socket) => {
     console.log("pre offer came!")
     const { calleePersonalCode, callType } = data
 
-    const connectedPeer = connectedPeers.find((peerSocketId) => {
-      peerSocketId === calleePersonalCode
-    })
+    const connectedPeer = connectedPeers.find(
+      (peerSocketId) => peerSocketId === calleePersonalCode
+    )
 
     console.log(connectedPeer)
 
