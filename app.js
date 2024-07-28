@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`${socket.id} disconnected`)
     const newConnectPeers = connectedPeers.filter((peerSocketId) => {
-      peerSocketId !== socket.io
+      return peerSocketId !== socket.io
     })
 
     connectedPeers = newConnectPeers

@@ -7,10 +7,20 @@ let connectedUserDetails
 export const sendPreOffer = (callType, calleePersonalCode) => {
   const data = {
     callType,
-    calleePersonalCode
+    socketId: calleePersonalCode
   }
 
-  wss.sendPreOffer(data)
+  if(callType === constants.callType.CHAT_PERSONAL_CODE || 
+    callType === constants.callType.VIDEO_PERSONAL_CODE
+  ) {
+    const data = {
+      callType,
+      calleePersonalCode
+    }
+    ui.showCallingDialog(callingRejectCallHandler)
+    wss.sendPreOffer(data)
+  }
+
 }
 
 export const handlePreOffer = (data) => {
@@ -35,4 +45,8 @@ const acceptCallHandler = () => {
 
 const rejectCallHandler = () => {
   console.log("Call rejected")
+}
+
+const callingRejectCallHandler = () => {
+  console.log('Rejecting call')
 }
