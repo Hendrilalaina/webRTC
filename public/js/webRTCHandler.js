@@ -42,6 +42,7 @@ export const handlePreOffer = (data) => {
 const acceptCallHandler = () => {
   console.log("Call accepted")
   sendPreOfferAnswer(constants.preOfferAnswer.CALL_ACCEPTED)
+  ui.showCallElements(connectedUserDetails.callType)
 }
 
 const rejectCallHandler = () => {
@@ -67,5 +68,9 @@ export const handlePreOfferAnswer = (data) => {
   const { preOfferAnswer } = data
   ui.removeAllDialogs()
 
-  ui.showInfoDialog(preOfferAnswer)
+  if (preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED) {
+    ui.showCallElements(connectedUserDetails.callType)
+  } else {
+    ui.showInfoDialog(preOfferAnswer)
+  }
 }

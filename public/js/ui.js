@@ -58,3 +58,60 @@ export const removeAllDialogs = () => {
   const dialog = document.getElementById('dialog')
   dialog.querySelectorAll('*').forEach((dialog) => dialog.remove())
 }
+
+export const showCallElements = (callType) => {
+  if (callType === constants.callType.CHAT_PERSONAL_CODE) {
+    showChatCallElements()
+  }
+
+  if (callType === constants.callType.VIDEO_PERSONAL_CODE) {
+    showVideoCallElements()
+  }
+}
+
+const showChatCallElements = () => {
+  const finished = document.getElementById('finish_chat_button_container')
+  showElement(finished)
+
+  const newMessageInput = document.getElementById('new_message')
+  showElement(newMessageInput)
+  disableDashboard()
+}
+
+const showVideoCallElements = () => {
+  const callButtons = document.getElementById('call_buttons')
+  showElement(callButtons)
+
+  const remoteVideo = document.getElementById('remote_video')
+  showElement(remoteVideo)
+
+  const newMessageInput = document.getElementById('new_messsage')
+  showElement(newMessageInput)
+  disableDashboard()
+}
+
+const enableDashboard = () => {
+  const dashboardBlocker = document.getElementById('dashboard_blur')
+  if (!dashboardBlocker.classList.contains('display_none')) {
+    dashboardBlocker.classList.add('display_none')
+  }
+}
+
+const disableDashboard = () => {
+  const dashboardBlocker = document.getElementById('dashboard_blur')
+  if (dashboardBlocker.classList.contains('display_none')) {
+    dashboardBlocker.classList.remove('display_none')
+  }
+}
+
+const hideElement = (element) => {
+  if (!element.classList.contains('display_none')) {
+    element.classList.add('display_none')
+  }
+}
+
+const showElement = (element) => {
+  if (element.classList.contains('display_none')) {
+    element.classList.remove('display_none')
+  }
+}
