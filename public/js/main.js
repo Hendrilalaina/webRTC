@@ -6,6 +6,8 @@ import * as constants from './constants.js'
 const socket = io("/")
 wss.registerSocketEvents(socket)
 
+webRTCHandler.getLocalPreview()
+
 const personalCodeCopyButton = document.getElementById("personal_code_copy_button")
 personalCodeCopyButton.addEventListener("click", () => {
   const personalCode = store.getState().socketId

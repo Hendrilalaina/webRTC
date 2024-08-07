@@ -6,6 +6,15 @@ export const updatePersonalCode = (personalCode) => {
   personalCodeParagraph.innerHTML = personalCode
 }
 
+export const updateLocalVideo = (stream) => {
+  const localVideo = document.getElementById('local_video')
+  localVideo.srcObject = stream
+
+  localVideo.addEventListener('loadedmetadata', () => {
+    localVideo.play()
+  })
+}
+
 export const showIncomingCallDialog = (
   callType,
   acceptCallHandler,
@@ -81,6 +90,9 @@ const showChatCallElements = () => {
 const showVideoCallElements = () => {
   const callButtons = document.getElementById('call_buttons')
   showElement(callButtons)
+
+  const placeholder = document.getElementById('video_placeholder')
+  hideElement(placeholder)
 
   const remoteVideo = document.getElementById('remote_video')
   showElement(remoteVideo)
