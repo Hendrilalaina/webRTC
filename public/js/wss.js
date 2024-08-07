@@ -22,3 +22,7 @@ export const sendPreOffer = (data) => {
   console.log("Emmiting to server pre offer event")
   socketIO.emit('pre-offer', data)
 }
+
+export const sendPreOfferAnswer = (data) => {
+  socketIO.emit('pre-offer-answer', data)
+}
