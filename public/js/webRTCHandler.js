@@ -67,23 +67,5 @@ export const handlePreOfferAnswer = (data) => {
   const { preOfferAnswer } = data
   ui.removeAllDialogs()
 
-  switch (preOfferAnswer) {
-    case (constants.preOfferAnswer.CALLEE_NOT_FOUND): {
-      // show dialog that calle has been not found
-      break
-    }
-    case (constants.preOfferAnswer.CALL_UNAVAILABLE): {
-      // show dialog that callee is not able to connect
-      break
-    }
-    case (constants.preOfferAnswer.CALL_REJECTED): {
-      // show dialog that call is rejected by callee
-      break
-    }
-    default: {
-      // send webRTC offer
-      break
-    }
-
-  }
+  ui.showInfoDialog(preOfferAnswer)
 }
