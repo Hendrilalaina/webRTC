@@ -15,6 +15,11 @@ export const updateLocalVideo = (stream) => {
   })
 }
 
+export const updateRemoteVideo = (stream) => {
+  const remoteVideo = document.getElementById('remote_video')
+  remoteVideo.srcObject = stream
+}
+
 export const showIncomingCallDialog = (
   callType,
   acceptCallHandler,
@@ -97,7 +102,7 @@ const showVideoCallElements = () => {
   const remoteVideo = document.getElementById('remote_video')
   showElement(remoteVideo)
 
-  const newMessageInput = document.getElementById('new_messsage')
+  const newMessageInput = document.getElementById('new_message')
   showElement(newMessageInput)
   disableDashboard()
 }
