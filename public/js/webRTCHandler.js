@@ -180,3 +180,35 @@ export const handleWebRTCCandidate = async (data) => {
     console.error('error occured when trying ice candidate', error)
   }
 }
+
+let screenSharingStream
+
+export const switchScreenSharing = async (setScreenSharingActive) => {
+  if (setScreenSharingActive) {
+
+  } else {
+    console.log('switching for screen sharing')
+    try {
+      screenSharingStream = await navigator.mediaDevices.getDisplayMedia({
+        video: true
+      })
+      store.setSharingStream(screenSharingStream)
+
+      // replace track which sender is sending
+      const senders = peerConnection.getSenders()
+
+      const sender = senders.find((sender) => {
+        sender.track.kind === screenSharingStream.getVideoTracks()[0].kind
+      })
+
+      if (sender) {
+        sender.replaceTrack(screenSharingStream.getVideoTracks()[0])
+      }
+
+      store.setScreenSharingActive(!setScreenSharingActive)
+      ui.updateLocalVideo(screenSharingStream)
+    } catch (err) {
+      console.error('error when trying to share screen stream', err)
+    }
+  }
+}
