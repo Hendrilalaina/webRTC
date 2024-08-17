@@ -66,6 +66,8 @@ newMessageInput.addEventListener('keydown', (event) => {
 
   if (key === 'Enter') {
     webRTCHandler.sendMessage(event.target.value)
+    ui.appendMessage(event.target.value, true)
+    newMessageInput.value = ""
   }
 })
 
@@ -73,5 +75,6 @@ const sendMessageButton = document.getElementById('new_message_button')
 sendMessageButton.addEventListener('click', () => {
   const message = newMessageInput.value
   webRTCHandler.sendMessage(message)
+  ui.appendMessage(message, true)
   newMessageInput.value = ""
 })
