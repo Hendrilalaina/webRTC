@@ -5,6 +5,7 @@ import * as store from './store.js'
 
 let connectedUserDetails
 let peerConnection
+let dataChannel
 
 const defaultConstraints = {
   audio: true,
@@ -34,7 +35,21 @@ export const getLocalPreview = () => {
 
 const createPeerConnection = () => {
   peerConnection = new RTCPeerConnection(configuration)
+  dataChannel = peerConnection.createDataChannel('chat')
 
+  peerConnection.ondatachannel = (event) => {
+    const dataChannel = event.channel
+
+    dataChannel.onopen = () => {
+      console.log('peer connection is ready to receive data channel messages')
+    }
+  
+    dataChannel.onmessage = (event) => {
+      const message = JSON.parse(event.data)
+      
+    }
+  
+  }
   peerConnection.onicecandidate = (event) => {
     console.log('getting ice candicates from stun server')
     if (event.candidate) {
@@ -70,6 +85,11 @@ const createPeerConnection = () => {
       }
     }
   }
+}
+
+export const sendMessage = (message) => {
+  const stringifiedMessage = JSON.stringify(message)
+  dataChannel.send(stringifiedMessage)
 }
 
 export const sendPreOffer = (callType, calleePersonalCode) => {
@@ -183,8 +203,22 @@ export const handleWebRTCCandidate = async (data) => {
 
 let screenSharingStream
 
-export const switchScreenSharing = async (setScreenSharingActive) => {
-  if (setScreenSharingActive) {
+export const switchScreenSharing = async (screenSharingActive) => {
+  if (screenSharingActive) {
+    const localStream = store.getState().localStream
+    const senders = peerConnection.getSenders()
+
+    const sender = senders.find((sender) => {
+      sender.track.kind === screenSharingStream.getVideoTracks()[0].kind
+    })
+
+    if (sender) {
+      sender.replaceTrack(screenSharingStream.getVideoTracks()[0])
+    }
+
+    store.getState().screenSharingStream.getTracks().forEach((track) => track.stop())
+    store.setScreenSharingActive(!screenSharingActive)
+    ui.updateLocalVideo(localStream)
 
   } else {
     console.log('switching for screen sharing')
@@ -205,7 +239,7 @@ export const switchScreenSharing = async (setScreenSharingActive) => {
         sender.replaceTrack(screenSharingStream.getVideoTracks()[0])
       }
 
-      store.setScreenSharingActive(!setScreenSharingActive)
+      store.setScreenSharingActive(!screenSharingActive)
       ui.updateLocalVideo(screenSharingStream)
     } catch (err) {
       console.error('error when trying to share screen stream', err)
