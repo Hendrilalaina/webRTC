@@ -28,6 +28,14 @@ export const registerSocketEvents = (socket) => {
         webRTCHandler.handleWebRTCOffer(data)
         break
 
+      case constants.webRTCSignaling.ANSWER:
+        webRTCHandler.handlePreOfferAnswer(data)
+        break
+
+      case constants.webRTCSignaling.ICE_CANDIDATE:
+        webRTCHandler.handleWebRTCCandidate(data)
+        break
+
       default:
         return
     }
