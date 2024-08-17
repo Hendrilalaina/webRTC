@@ -246,3 +246,39 @@ export const switchScreenSharing = async (screenSharingActive) => {
     }
   }
 }
+
+
+// hang up 
+
+export const handleHangUp = () => {
+  console.log('finishing the call')
+  const data = {
+    connectedUserSocketId: connectedUserDetails.socketId
+  }
+
+  wss.sendUserHangedUp(data)
+  console.log(connectedUserDetails)
+  closePeerConnectionAndResetState(connectedUserDetails)
+}
+
+export const handleConnectedUserHangedUp = () => {
+  console.log('connected peer hanged up')
+  closePeerConnectionAndResetState(connectedUserDetails)
+}
+
+const closePeerConnectionAndResetState = (connectedUserDetails) => {
+  if (peerConnection) {
+    peerConnection.close()
+    peerConnection = null
+  }
+
+  if (connectedUserDetails.callType === constants.callType.VIDEO_PERSONAL_CODE ||
+      connectedUserDetails.callType === constants.callType.VIDEO_STRANGER
+  ) {
+    store.getState().localStream.getVideoTracks()[0].enabled = true
+    store.getState().localStream.getAudioTracks()[0].enabled = true
+
+    ui.updateUIAfterHangUp(connectedUserDetails.callType)
+    connectedUserDetails = null
+  }
+} 

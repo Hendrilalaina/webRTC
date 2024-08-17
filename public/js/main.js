@@ -78,3 +78,17 @@ sendMessageButton.addEventListener('click', () => {
   ui.appendMessage(message, true)
   newMessageInput.value = ""
 })
+
+// hang up
+
+const hangUpButton = document.getElementById('hang_up_button')
+hangUpButton.addEventListener('click', () => {
+  console.log('hangUp button clicked')
+  webRTCHandler.handleHangUp()
+})
+
+const hangUpChatButton = document.getElementById('finish_chat_call_button')
+hangUpButton.addEventListener('click', () => {
+  console.log('hangUp button clicked')
+  webRTCHandler.handleHangUp()
+})
